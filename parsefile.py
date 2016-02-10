@@ -11,7 +11,8 @@ def isa_group_separator(line):
 # return a writing directory
 def get_the_directory():
     # give the file path to write the files
-    path = r"C:\Users\manoz debnath\Desktop\py\files\\"
+    path = os.path.dirname(__file__)
+    path = path + "/files/"
     if not os.path.exists(path):
         os.makedirs(path)
     return path
@@ -19,7 +20,8 @@ def get_the_directory():
 
 # give the file path from where you want to read the file
 def main_module(i=1):
-    with open(r"C:\Users\manoz debnath\Desktop\py\html.txt") as f:
+    path = os.path.dirname(__file__)
+    with open(path + "/html.txt") as f:
         for key, group in itertools.groupby(f, isa_group_separator):
             if key == False:
                 with open(get_the_directory() + str(i) + ".html", 'w') as d:
