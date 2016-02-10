@@ -2,12 +2,14 @@ from __future__ import print_function
 import itertools
 import os
 
-#Specify the separator of the block
+
+# Specify the separator of the block
 def isa_group_separator(line):
     return line == '\n'
 
-#return a writing directory
-def go_to_directory():
+
+# return a writing directory
+def get_the_directory():
     # give the file path to write the files
     path = r"C:\Users\manoz debnath\Desktop\py\files\\"
     if not os.path.exists(path):
@@ -16,18 +18,18 @@ def go_to_directory():
 
 
 # give the file path from where you want to read the file
-def iterate_over_the_file(i=1):
+def main_module(i=1):
     with open(r"C:\Users\manoz debnath\Desktop\py\html.txt") as f:
         for key, group in itertools.groupby(f, isa_group_separator):
             if key == False:
-                with open(go_to_directory() + str(i) + ".html", 'w') as d:
+                with open(get_the_directory() + str(i) + ".html", 'w') as d:
                     d.writelines(group)
                     d.close()
                     i += 1
     f.close()
 
 # call the function
-iterate_over_the_file()
+main_module()
 
 #####################################
 
