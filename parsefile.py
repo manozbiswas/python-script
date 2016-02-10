@@ -1,6 +1,7 @@
 from __future__ import print_function
 import itertools
 import os
+import datetime
 
 
 # Specify the separator of the block
@@ -8,27 +9,27 @@ def isa_group_separator(line):
     return line == '\n'
 
 
-# return a writing directory
-def get_the_directory():
-    # give the file path to write the files
-    path = os.path.dirname(__file__)
-    path = path + "/files/"
+# return a directory path
+def get_the_directory(path):
     if not os.path.exists(path):
         os.makedirs(path)
     return path
 
 
-# give the file path from where you want to read the file
 def main_module(i=1):
     path = os.path.dirname(__file__)
-    with open(path + "/html.txt") as f:
+    # give the file path from where you want to read the file
+    with open(path + "/new.txt") as f:
         for key, group in itertools.groupby(f, isa_group_separator):
-            if key == False:
-                with open(get_the_directory() + str(i) + ".html", 'w') as d:
+            if not key:
+                # give the directory path to write the files
+                file_format = "MP" + datetime.datetime(2016, 2, 6).strftime('%Y%m%d') + '{:03}'.format(i)
+                with open(get_the_directory("{0}/files/".format(path)) + file_format + ".html", 'w') as d:
                     d.writelines(group)
                     d.close()
                     i += 1
     f.close()
+
 
 # call the function
 main_module()
