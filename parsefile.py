@@ -17,7 +17,7 @@ def get_the_directory(path):
 
 
 def main_module(i=1):
-    path = os.path.dirname(__file__)
+    path = os.getcwd()
     # give the file path from where you want to read the file
     with open(path + "/new.txt") as f:
         for key, group in itertools.groupby(f, isa_group_separator):
@@ -30,9 +30,9 @@ def main_module(i=1):
                     i += 1
     f.close()
 
-
 # call the function
 main_module()
+
 
 
 #####################################
